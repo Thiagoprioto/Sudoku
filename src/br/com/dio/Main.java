@@ -53,7 +53,7 @@ public class Main {
                 case 7 -> finishGame();
                 case 8 -> System.exit(0);
 
-                    default -> System.out.println("Opção invalida, selecione uma opção do menu!");
+                default -> System.out.println("Opção invalida, selecione uma opção do menu!");
 
             }
         }
@@ -98,7 +98,7 @@ public class Main {
 
         System.out.printf("Informe o numero que sera inserido na posição [%s,%s]\n", col, row);
         var value = runUntilGetValidNumber(1, 9);
-        if (board.changeValue(col, row, value)){
+        if (!board.changeValue(col, row, value)){
             System.out.printf("A posição [%s,%s] tem um valor fixo\n", col, row);
         }
 
@@ -117,7 +117,7 @@ public class Main {
         System.out.println("Informe a linha em que o número será removido");
         var row = runUntilGetValidNumber(0, 8);
 
-        if (board.clearValue(col, row)) {
+        if (!board.clearValue(col, row)) {
             System.out.printf("A posição [%s,%s] tem um valor fixo\n", col, row);
         }
     }
@@ -128,7 +128,7 @@ public class Main {
 
             return;
         }
-        var args = new Object [01];
+        var args = new Object [81];
         var argPos = 0;
         for (int i = 0; i < BOARD_LIMIT; i++) {
             for (var col: board.getSpaces()){
@@ -159,14 +159,14 @@ public class Main {
 
             return;
         }
-        System.out.println("Tem certeza que quer fazer isso e perder o progresso?");
+        System.out.println("Tem certeza que quer fazer isso e perder o progresso? s/n");
         var confirm = sc.next();
-        while (!confirm.equalsIgnoreCase("sim") || !confirm.equalsIgnoreCase("não")) {
-            System.out.println("Informe 'sim' ou 'não'");
+        while (!confirm.equalsIgnoreCase("s") && !confirm.equalsIgnoreCase("n")) {
+            System.out.println("Informe 's' ou 'n'");
             confirm = sc.next();
         }
 
-        if (confirm.equalsIgnoreCase("sim")) {
+        if (confirm.equalsIgnoreCase("s")) {
             board.reset();
         }
     }
@@ -188,14 +188,6 @@ public class Main {
             System.out.println("Você ainda precisa preencher alguns espaços!");
         }
     }
-
-
-
-
-
-
-
-
 
     private static int runUntilGetValidNumber(final int min, final int max){
         var current = sc.nextInt();
