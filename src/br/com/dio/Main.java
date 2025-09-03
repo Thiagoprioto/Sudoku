@@ -189,7 +189,6 @@ public class Main {
         }
     }
 
-
     private static int runUntilGetValidNumber(final int min, final int max){
         var current = sc.nextInt();
         while (current < min || current > max){
